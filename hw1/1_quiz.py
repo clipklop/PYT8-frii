@@ -1,28 +1,25 @@
 """
     * A Quiz app
-
-    Задание №1 (простое)
-Написать программу, которая будет задавать пользователю вопросы, и проверять правильность ответов.
-Если пользователь неправильно ответил на вопрос, то выводится сообщение, что ответ неверный и вопрос задается повторно.
-Программа должна задавать не менее трех вопросов.
-Вопросы задаются последовательно.
 """
 
 
-questions = {
-    'how many bits in one byte': 8,
-    'how many patterns in one byte': 256,
-    'how many characters could be stored in one byte': 1,
-    'Whats name of Encoding system representing each typed character by a number': 'ASCII'
-}
+questions = [
+    ['how many bits in one byte', '8'],
+    ['how many patterns in one byte', '256'],
+    ['how many characters could be stored in one byte', '1'],
+    ['Whats name of Encoding system representing each typed character by a \
+number', 'ASCII']
+]
 
 
 def quiz(array):
-    return [x for x in array]
+    counter = 0
+    while len(array) > counter:
+        answer = input("{}: ".format(array[counter][0])).upper()
+        if answer == array[counter][1]:
+            counter += 1
+    print('Congratz! You guessed all {} questions!'.format(counter))
+    return
 
 
-print(quiz(questions))
-
-
-
-
+quiz(questions)
