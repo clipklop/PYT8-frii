@@ -3,35 +3,38 @@
 """
 
 
-def calc(nums=[], total=0):
-    while True:
-        inp = input("Введите число: ")
+def math_ops(op, num1, num2):
+    if op == '+':
+        return num1 + num2
+    if op == '-':
+        return num1 - num2
+    if op == '*':
+        return num1 * num2
+    if op == '/':
+        return num1 // num2
 
+
+def calc(total=0, num=0):
+    inp = input("Введите действие или число: ")
+    while True:
         if inp == '':
-            print("Ok, I'm out")
+            print(f"Итоговый результат: {total}")
             break
 
-        if inp.isdigit():
-            nums.append(int(inp))
-            print(nums)
+        if inp in ['+', '-', '*', '/']:
+            op = inp
+            print(inp)
 
-        if len(nums) == 2:
-            inp = input("Введите действие (+, -, *, /): ")
-            if inp == '+':
-                total = nums[0] + nums[1]
+        if inp.isdigit():
+            num = int(inp)
+            if total == 0:
+                total += num
                 print(total)
-                nums = []
-            elif inp == '-':
-                total = nums[0] - nums[1]
-                print(total)
-                nums = []
-            elif inp == '*':
-                total = nums[0] * nums[1]
-                print(total)
-                nums = []
-            elif inp == '/':
-                total = nums[0] / nums[1]
-                print(total)
-                nums = []
+            else:
+                total = math_ops(op, total, num)
+                print(f"Промежуточный итог: {total}")
+
+        inp = input("Введите следующее действие или число: ")
+
 
 calc()
