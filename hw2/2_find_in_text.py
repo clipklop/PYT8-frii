@@ -29,13 +29,14 @@ def find_count(text):
     splitted = ''.join(new_text).split()
 
     temp = {}
-    # count = 0
     for word in splitted:
         if word not in temp:
             temp[word] = 1
         else:
             temp[word] += 1
-    return sorted(temp.items())
+
+    sorted_temp = sorted(temp.items(), key=lambda k: k[1], reverse=True)
+    return sorted_temp[:10]
 
 
 print(find_count(text))
