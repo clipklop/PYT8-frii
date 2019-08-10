@@ -25,58 +25,58 @@ import random
 
 
 WORDS = [
-    'python', 'avocado', 'tumeric', 'walnut'
+    'python', 'mango', 'tumeric', 'walnut'
 ]
 
 
-def draw(guess, word):
-    string = ''
-    for letter in word:
-        if letter in guess:
-            #print(letter, end='')
-            string += letter
-            # print(string, end='')
-        else:
-            # print('_ ', end='')
-            string += '_ '
-#            print(stringend='')
-
-    print('')
-    return string
-
-
-def field_of_miracles(array: list, guess: str):
+def field_of_miracles(array: list):
     random.shuffle(array)
     correct = []
+    wrong = []
     counter = 0
+    score = 0
+    print(f'Начинаем играть: ', end='')
 
     for word in array:
-        print('_ ' * len(word))
+        string = '_' * len(word)
+        print(string)
 
         while True:
             guess = input('\nВведите букву: ')
-            if guess in word:
-                correct.append(guess)
 
-            draw(guess, word)
-            
-            if ''.join(correct) == word:
-                counter += 1
-                print(f"Correct! You've guessed {counter} word of {len(array)} words")
+            if guess == '':
+                print("\nOk, I'm out")
+                break
+            elif len(guess) != 1:
+                print("Too many letters")
+                continue
+            elif guess in correct:
+                print('Такую букву уже называли!')
+                continue
+            elif not guess.isalpha():
+                print("Nope, only letters are allowed")
+
+            if guess in word:
+                correct.insert(word.index(guess), guess)
+                string = string[:word.index(guess)] + guess + \
+                    string[word.index(guess)+1:]
+                print(f'\n{string}')
+            else:
+                wrong.append(guess)
+                print(f"Нет такой буквы!: {' '.join(wrong)}", end=' ')
+                print('\n' + string)
+
+            if ''.join(correct).strip() == word:
+                score += 1
+                print(f"Correct! You've guessed {score} word of \
+{len(array)} words")
                 break
 
-    print(f'Good job! Your score is {counter} words.')
+        correct = []
+        counter += 1
+        print(f'\nOk! Next word. {len(array) - counter} words left.')
 
-            
-
-field_of_miracles(WORDS, 'a')
-
-
-def main():
-    print('Начинаем играть: {}'.format(len()))
-    guess = input('Введите букву: ')
-
-    field_of_miracles(WORDS, guess)
+    print(f'\nGood job! Your score is {score} words.')
 
 
-#main()
+field_of_miracles(WORDS)
