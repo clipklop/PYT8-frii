@@ -21,18 +21,54 @@
 Введите букву: n
 Поздравляем, вы отгадали слово! : p y t h o n
 """
+import random
+
 
 WORDS = [
     'python', 'avocado', 'tumeric', 'walnut'
 ]
 
 
+def draw(guess, word):
+    string = ''
+    for letter in word:
+        if letter in guess:
+            #print(letter, end='')
+            string += letter
+            # print(string, end='')
+        else:
+            # print('_ ', end='')
+            string += '_ '
+#            print(stringend='')
+
+    print('')
+    return string
+
+
 def field_of_miracles(array: list, guess: str):
+    random.shuffle(array)
     correct = []
+    counter = 0
 
     for word in array:
         print('_ ' * len(word))
-        correct.append(guess) if guess in word else 0
+
+        while True:
+            guess = input('\nВведите букву: ')
+            if guess in word:
+                correct.append(guess)
+
+            draw(guess, word)
+            
+            if ''.join(correct) == word:
+                counter += 1
+                print(f"Correct! You've guessed {counter} word of {len(array)} words")
+                break
+
+    print(f'Good job! Your score is {counter} words.')
+
+            
+
 field_of_miracles(WORDS, 'a')
 
 
