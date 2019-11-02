@@ -12,7 +12,7 @@ flask-wtf = "==0.14.2"
 itsdangerous = "==0.24"
 jinja2 = "==2.9.6"
 markupsafe = "==1.0"
-werkzeug = "==0.12.2"
+werkzeug = "==0.15.3"
 wtforms = "==2.1"
 
 [requires]
